@@ -6,7 +6,7 @@ const faker = require('faker');
 const should = chai.should();
 
 const {app, runServer, closeServer} = require('../server');
-
+const {hackerNews} = require('../models');
 
 chai.use(chaiHttp);
 
@@ -50,4 +50,38 @@ describe('Hacker News API', function() {
   after(function() {
     return closeServer();
   });
+
+ describe('POST endpoint', function(){
+   it('should add a new hacker post', function(){
+     const newHackerPost = generateData();
+     let mostRecentVote;
+
+     return chai.request(app)
+     .post('/stories')
+     .send(newHackerPost)
+     .then(function(res){
+       console.log(res.body, 'Response');
+      res.should.have.status(201);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.include.keys(
+        'id', 'title', 'url', 'votes'
+      );
+      res.body.id.should.equal(newHackerPost.id);
+      res.body.title.should.equal(newHackerPost.title);
+      res.body.url.should.equal(newHackerPost.url);
+      res.body.votes.should.equal(newHackerPost.votes);
+
+
+     });
+   });
+
+ });
+
+
+
+
+
+
+
 });

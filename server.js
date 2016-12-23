@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 
 const DATABASE_URL = process.env.DATABASE_URL ||
                      global.DATABASE_URL ||
-                     'mongodb://localhost/hn-api';
+                     'mongodb://localhost/stories';
 const PORT = process.env.PORT || 8080;
 const {hackerNews} = require('./models');
 
@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 // Using Postman to add some stories
 // Using the Mongo shell to make sure they were added to the database
 app.post('/stories',(req,res) => {
+  console.log(req.body);
   const requiredFields = ['title', 'url', 'votes'];
   requiredFields.forEach(field => {
     if (! (field in req.body && req.body[field])) {
