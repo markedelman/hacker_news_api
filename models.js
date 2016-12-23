@@ -24,7 +24,8 @@ hackerNewsSchema.methods.apiRepr = function(){
   return {
     id: this._id,
     title: this.title,
-    vote: this.vote
+    url: this.url,
+    votes: this.votes
   };
 };
 

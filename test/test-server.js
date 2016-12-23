@@ -51,6 +51,8 @@ describe('Hacker News API', function() {
     return closeServer();
   });
 
+
+
  describe('POST endpoint', function(){
    it('should add a new hacker post', function(){
      const newHackerPost = generateData();
@@ -60,17 +62,17 @@ describe('Hacker News API', function() {
      .post('/stories')
      .send(newHackerPost)
      .then(function(res){
-       console.log(res.body, 'Response');
+       console.log('Res Start:',res.body, ':Res End','nHP Start:',newHackerPost, ':nHP End');
       res.should.have.status(201);
       res.should.be.json;
       res.body.should.be.a('object');
       res.body.should.include.keys(
         'id', 'title', 'url', 'votes'
       );
-      res.body.id.should.equal(newHackerPost.id);
+      // res.body.id.should.equal(newHackerPost.apiRepr().id);
       res.body.title.should.equal(newHackerPost.title);
-      res.body.url.should.equal(newHackerPost.url);
-      res.body.votes.should.equal(newHackerPost.votes);
+       res.body.url.should.equal(newHackerPost.url);
+       res.body.votes.should.equal(newHackerPost.votes);
 
 
      });
