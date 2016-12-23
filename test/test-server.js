@@ -34,5 +34,5 @@ describe('Hacker News API', function() {
 
   after(function() {
     return closeServer();
-  })
+  });
 });
