@@ -12,6 +12,21 @@ chai.use(chaiHttp);
 
 function seedData() {
     console.info('Seeding data');
+    const seedNewsData = [];
+
+    for (let i = 1; i <= 10; i++){
+      seedNewsData.push(generateData());
+    }
+    //return seeding promise
+    return hackerNews.insertMany(seedNewsData);
+}
+
+function generateData(){
+  return {
+    title: faker.company.catchPhrase(),
+    url: faker.internet.url(),
+    votes: faker.random.number()
+  };
 }
 
 function tearDownDb() {
